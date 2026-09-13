@@ -4,7 +4,7 @@ layout: post
 date: 2022-02-14 12:00
 category: project
 projects: true
-project-category: Graphics and Content
+project-category: Graphics & Content
 tag:
 - esports
 - graphics
