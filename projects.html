@@ -38,6 +38,14 @@ title: Projects
 {% endfor %}
 
 {% comment %} projects without a project-category still show in one uncategorized list {% endcomment %}
+{% assign has_uncategorized = false %}
+{% for post in site.posts %}
+    {% if post.projects and post.hidden != true and post.project-category == nil %}
+        {% assign has_uncategorized = true %}
+    {% endif %}
+{% endfor %}
+
+{% if has_uncategorized %}
 <section class="list">
     {% for post in site.posts %}
         {% if post.projects and post.hidden != true and post.project-category == nil %}
@@ -50,3 +58,4 @@ title: Projects
         {% endif %}
     {% endfor %}
 </section>
+{% endif %}
