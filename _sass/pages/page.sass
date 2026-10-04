@@ -10,3 +10,237 @@
         width: 50%
         margin: 0 auto
         display: block
+
+.about-profile
+    --profile-accent: #{$delta}
+    --profile-highlight: #{$delta}
+    max-width: 680px
+    margin: 0 auto 7rem
+
+    &__hero
+        display: grid
+        grid-template-columns: 145px 1fr
+        align-items: center
+        gap: 2.8rem
+        padding: 1.4rem 0 3.4rem
+
+    &__portrait-wrap
+        position: relative
+        padding: 8px
+        border: 1px solid $epsilon
+        background: $omega
+
+    &__portrait
+        width: 100% !important
+        aspect-ratio: 1
+        object-fit: cover
+        margin: 0 !important
+        filter: saturate(.78)
+
+    &__portrait-index
+        position: absolute
+        left: -1.2rem
+        bottom: -1.2rem
+        padding: .45rem .65rem
+        color: #fff
+        background: var(--profile-accent)
+        font: 700 1rem $fontMonospace
+        letter-spacing: 0
+
+    &__eyebrow
+        display: flex
+        align-items: center
+        gap: .8rem
+        margin: 0 0 1rem
+        color: $gama
+        font: 700 1rem $fontMonospace
+        letter-spacing: 0
+
+        span
+            width: 8px
+            height: 8px
+            border-radius: 50%
+            background: var(--profile-highlight)
+
+    &__intro h1
+        margin: 0 0 .5rem
+        font-size: 4.3rem
+        line-height: 1
+
+        span
+            color: var(--profile-accent)
+
+    &__dek
+        max-width: 38rem
+        margin: 0
+        font-size: 1.5rem
+
+    &__divider
+        width: 100%
+        height: 1px
+        margin: 0
+        background: $epsilon
+
+    &__section
+        display: grid
+        grid-template-columns: 14rem 1fr
+        gap: 2.2rem
+        padding: 3.2rem 0
+        border-bottom: 1px solid $epsilon
+
+    &__section-label
+        color: $gama
+        font: 700 1rem $fontMonospace
+        letter-spacing: 0
+
+        span
+            display: inline-block
+            margin-right: .6rem
+            color: var(--profile-accent)
+
+    &__section-body h2
+        margin: -.5rem 0 1.5rem
+        font-size: 2.5rem
+        line-height: 1.2
+
+    &__section-body p
+        margin: 0
+
+    &__focus-list
+        border-top: 1px solid $epsilon
+
+    &__focus-item
+        display: grid
+        grid-template-columns: 3.2rem 1fr
+        gap: 1rem
+        padding: 1.5rem 0
+        border-bottom: 1px solid $epsilon
+
+        h3
+            margin: 0 0 .35rem
+            font-size: 1.6rem
+
+        p
+            margin: 0
+            font-size: 1.4rem
+
+    &__focus-number
+        color: var(--profile-accent)
+        font: 700 1.2rem $fontMonospace
+
+    &__credential-note
+        display: grid
+        grid-template-columns: 3.2rem 1fr
+        align-items: start
+        gap: 1rem
+        padding: 1.5rem
+        border: 1px solid $epsilon
+        background: $omega
+
+        h2
+            margin: 0 0 .5rem
+            font-size: 1.7rem
+
+        p
+            margin: 0
+            font-size: 1.3rem
+
+    &__credentials
+        border-bottom: 0
+
+    &__credential-list
+        margin: 1rem 0 0
+        padding: 0
+        list-style: none
+
+        li
+            display: flex
+            justify-content: space-between
+            gap: 1rem
+            padding: .8rem 0
+            border-top: 1px solid $epsilon
+            font-size: 1.3rem
+
+        strong
+            color: $beta
+            font-weight: 700
+
+        span
+            color: $gama
+            text-align: right
+
+        em
+            margin-left: .5rem
+            color: var(--profile-accent)
+            font-size: 1rem
+            font-style: normal
+            font-weight: 700
+            text-transform: uppercase
+
+    &__credential-mark
+        display: grid
+        width: 3rem
+        aspect-ratio: 1
+        place-items: center
+        color: var(--profile-accent)
+        border: 1px solid $epsilon
+        font-size: 2rem
+
+    &__credential-status
+        color: $gama
+        font: 700 .9rem $fontMonospace
+        white-space: nowrap
+
+    &__outro
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 1.5rem
+        padding: 2.2rem 0
+
+        p
+            margin: 0
+            color: $beta
+            font-weight: 700
+
+        a
+            color: var(--profile-accent)
+            font-weight: 700
+            white-space: nowrap
+
+    @media #{$below}
+        &__hero
+            grid-template-columns: 112px 1fr
+            gap: 2rem
+
+        &__intro h1
+            font-size: 3.5rem
+
+        &__section
+            grid-template-columns: 1fr
+            gap: 1.5rem
+
+    @media #{$mobile}
+        &__hero
+            grid-template-columns: 1fr
+            justify-items: start
+            gap: 2rem
+
+        &__portrait-wrap
+            width: 112px
+
+        &__credential-note
+            grid-template-columns: 3.2rem 1fr
+
+        &__credential-status
+            grid-column: 2
+
+        &__outro
+            align-items: flex-start
+            flex-direction: column
+
+.about .footer-main
+    border-top: 0
+
+    &:before
+        display: none
