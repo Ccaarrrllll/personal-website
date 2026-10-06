@@ -1,14 +1,15 @@
 ---
-layout: default
-permalink: /404.html 
+title: 404
+layout: page
+permalink: /404.html
 ---
 
-<section class="lost-container">
-  <h1>Uh oh!</h1>
-  <div class="link">
-    <img class="selfie" alt="{{ site.title }}" src="{{ site.url }}/assets/images/error.gif" />
-  </div>
-  <br />
-  <br />
-  <a href="/">Take me home!</a>
-</section>
+<main class="lost-container" aria-labelledby="lost-title">
+  <p class="lost-container__eyebrow"><span aria-hidden="true"></span>404</p>
+  <h2 class="lost-container__headline">that page doesn't exist or you were poking where you shouldn't be (:</h2>
+  <p class="lost-container__message">let's get you back to bed (homepage) grandma</p>
+  <a class="lost-container__home" href="{{ '/' | relative_url }}">
+    <span>Return to homepage</span>
+    <span class="lost-container__arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</main>
