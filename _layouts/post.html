@@ -40,6 +40,6 @@ layout: page
     {% include related.html %}
 {% endif %}
 
-{% if site.show-author %}
+{% if site.show-author and page.author %}
     {% include author.html %}
 {% endif %}

@@ -5,7 +5,6 @@ gem 'jekyll-sass-converter', '~> 3.0'
 
 group :jekyll_plugins do
     gem 'jekyll-feed'
-    gem 'jekyll-gist'
     gem 'jekyll-seo-tag'
     gem 'jemoji'
 end

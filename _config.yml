@@ -78,7 +78,6 @@ defaults:
 
 plugins:
   - jekyll-seo-tag
-  - jekyll-gist
   - jekyll-feed
   - jemoji
 
