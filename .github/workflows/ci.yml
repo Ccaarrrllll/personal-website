@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # weekly, so new gem advisories show up even without a commit
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@4e97ecde5048e1e0816923020652678063ffbf65 # v1.339.0
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build --strict_front_matter
+        env:
+          JEKYLL_ENV: production
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@4e97ecde5048e1e0816923020652678063ffbf65 # v1.339.0
+        with:
+          ruby-version: '3.3'
+
+      - name: Audit gems for known vulnerabilities
+        run: |
+          gem install bundler-audit -v 0.9.3 --no-document
+          bundle-audit check --update
