@@ -54,6 +54,7 @@ Personal Jekyll site (Ccaarrrllll), deployed via GitHub Pages at https://ccaarrr
 - External requests: only Google Tag Manager and the Font Awesome kit script. The kit loader can't use SRI.
 
 ## Backlog (ideas not yet done)
+- `<meta name="robots" content="noindex, nofollow">` in `_layouts/default.html` is **deliberate for now** (owner will remove it eventually). Search engines won't list the site. Don't remove it or add a sitemap until the owner says so; link previews (Discord, iMessage, Twitter) are unaffected by it.
 - Sitemap (`jekyll-sitemap`), per-post social preview images (`image:` front matter, `jekyll-seo-tag` is installed), TOC on long posts, three-way theme control (auto/light/dark), `theme-color` meta, accessibility pass (alt text, focus styles, `$alpha` contrast on dark), syntax colors in dark mode (`syntax.sass` has hardcoded colors).
 
 ## Conventions
