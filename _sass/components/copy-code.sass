@@ -1,0 +1,54 @@
+@use "../base/variables" as *
+
+.highlighter-rouge
+    position: relative
+
+    pre.highlight
+        padding-right: 44px
+
+.copy-code
+    position: absolute
+    top: 6px
+    right: 6px
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 30px
+    height: 30px
+    padding: 0
+    color: $gama
+    background: $omega
+    border: 1px solid $epsilon
+    border-radius: 4px
+    cursor: pointer
+    transition: color .2s ease-in-out, opacity .2s ease-in-out
+
+    &:hover,
+    &:focus-visible
+        color: $beta
+
+    .icon-check
+        display: none
+
+    &.copied
+        color: $delta
+
+        .icon-copy
+            display: none
+
+        .icon-check
+            display: block
+
+// only hide until hover where hover exists; touch devices always show it
+@media (hover: hover)
+    .copy-code
+        opacity: 0
+
+    .highlighter-rouge:hover .copy-code,
+    .copy-code:focus-visible,
+    .copy-code.copied
+        opacity: 1
+
+@media (prefers-reduced-motion: reduce)
+    .copy-code
+        transition: none

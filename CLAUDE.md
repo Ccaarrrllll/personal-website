@@ -26,16 +26,22 @@ Personal Jekyll site (Ccaarrrllll), deployed via GitHub Pages at https://ccaarrr
 - The toggle button (`.theme-toggle`) is in `_includes/nav.html`: last item in the nav list on normal pages, and its own top-right `.nav` on the home page (whose links are centered). It only renders when `dark-theme == "auto"`.
 - Tried a fixed bottom-right circle button and went back to top-right.
 
+## Code block copy button
+- `assets/js/copy-code.js` adds a button to every `div.highlighter-rouge` (Rouge's wrapper: `div.highlighter-rouge > div.highlight > pre > code`) and copies the `pre` text. Loaded at the end of `_layouts/default.html` via `relative_url` so it works on the local dev server too.
+- Styles are in `_sass/components/copy-code.sass` (registered in both `style.scss` and `style-dark.scss`). Hidden until hover where hover exists; always visible on touch.
+- Inline SVG icons, no visible text, only `aria-label`s ("Copy code" / "Copied"), so no site copy needed.
+
 ## Security and CI
 - `Gemfile.lock` is tracked (it used to be gitignored, so CI resolved fresh gems on every build). Platforms: `x64-mingw-ucrt` and `x86_64-linux`; keep both when regenerating (`bundle lock --add-platform x86_64-linux`).
 - Update gems with `bundle update --patch` for stability; check advisories with `bundle-audit check --update` (`gem install bundler-audit`). Last audit (2026-11-17): clean after nokogiri 1.19.4 -> 1.19.7.
 - Workflows (`.github/workflows/`): `deploy.yml` builds and deploys on push to `main`; `ci.yml` builds with `--strict_front_matter` and runs bundler-audit on PRs and weekly. Actions are pinned to full commit SHAs with the version in a trailing comment, `persist-credentials: false` on checkout, and permissions are least-privilege per job (only `deploy` gets `pages: write` / `id-token: write`).
-- `.github/dependabot.yml` covers bundler and github-actions weekly with a 7-day cooldown. Actions are intentionally at the majors from before 2026-11 (checkout v4, pages actions v3/v4); newer majors exist (checkout v7, upload-pages-artifact v5, deploy-pages v5) and should come in as Dependabot PRs validated by `ci.yml`, not by hand. `upload-pages-artifact` and `deploy-pages` should be bumped together.
+- `.github/dependabot.yml` covers bundler and github-actions weekly with a 7-day cooldown. Its PRs are validated by `ci.yml` (build + audit); merge with squash, use `@dependabot rebase` if a PR goes stale after another merge. Caveat: `ci.yml` does not exercise `upload-pages-artifact` or `deploy-pages`, so bumps to those are only tested by the real deploy after merge. Bump them together and watch the Actions tab.
+- Current state (2026-11-17, all Dependabot PRs merged): checkout v7.0.1, setup-ruby v1.339.0, upload-pages-artifact v5.0.0, deploy-pages v5.0.1, Jekyll 4.4.1, jekyll-seo-tag 2.9.1, nokogiri 1.19.7. Audit clean.
+- The repo's **Pull requests** feature must be enabled (Settings > General > Features). It was off at first, so Dependabot pushed branches but could not open PRs. Creation is set to "Collaborators only".
 - `_config.yml` `exclude` must list internal files (`CLAUDE.md`, `README.md`, `Gemfile*`), because Jekyll publishes any non-dotfile in the repo root. CLAUDE.md was briefly published by accident; it was caught before pushing.
 - External requests: only Google Tag Manager and the Font Awesome kit script. The kit loader can't use SRI.
 
 ## Backlog (ideas not yet done)
-- Copy button on code blocks (e.g. KQL snippets); wanted.
 - Image `loading="lazy"` (no quality loss; only changes when the browser downloads). Avoid resizing/recompressing unless quality is confirmed acceptable.
 - Sitemap (`jekyll-sitemap`), per-post social preview images (`image:` front matter, `jekyll-seo-tag` is installed), TOC on long posts, three-way theme control (auto/light/dark), `theme-color` meta, accessibility pass (alt text, focus styles, `$alpha` contrast on dark), syntax colors in dark mode (`syntax.sass` has hardcoded colors).
 
