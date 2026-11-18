@@ -898,7 +898,7 @@ FileCreationEvents
 ```
 
 <figure>
-  <img src="/assets/images/kc7/virustotal-q8.png" alt="VirusTotal results for the file hash, showing 35 of 64 vendors flagging it as malicious, with the uploaded .dll filename redacted">
+  <img src="/assets/images/kc7/virustotal-q8.png" alt="VirusTotal results for the file hash, showing 35 of 64 vendors flagging it as malicious, with the uploaded .dll filename redacted" width="1400" height="302" loading="lazy" decoding="async">
   <figcaption>Searching the sha256 on VirusTotal. The uploaded filename is boxed (and redacted).</figcaption>
 </figure>
 

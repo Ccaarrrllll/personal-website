@@ -14,7 +14,7 @@ description: "A highlight montage of my old overwatch clips."
 externalLink: false
 ---
 
-<iframe width="560" height="310" src="https://www.youtube.com/embed/HbdKxqRQTG4?si=JwAzbZX8ll2ld-o4" frameborder="0" allowfullscreen></iframe>
+<iframe loading="lazy" width="560" height="310" src="https://www.youtube.com/embed/HbdKxqRQTG4?si=JwAzbZX8ll2ld-o4" frameborder="0" allowfullscreen></iframe>
 
 A short highlight reel/montage of personal clips from Overwatch and Overwatch 2. All gameplay, recordings, and editing was done by myself.
 
