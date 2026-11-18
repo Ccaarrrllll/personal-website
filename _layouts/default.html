@@ -22,19 +22,19 @@ layout: compress
     <style>
     
     {% if site.dark-theme == "auto" %}
-        {% capture scss_sheet %}
-            {% include style.scss %}
-            @media (prefers-color-scheme: dark) {
-                {% include style-dark.scss %}
-            }
-        {% endcapture %}
+        {% capture light_sheet %}{% include style.scss %}{% endcapture %}
+        {% capture dark_sheet %}{% include style-dark.scss %}{% endcapture %}
+        {{ light_sheet | scssify }}
+        @media (prefers-color-scheme: dark) {
+            {{ dark_sheet | scssify }}
+        }
     {% elsif site.dark-theme %}
         {% capture scss_sheet %}{% include style-dark.scss %}{% endcapture %}
+        {{ scss_sheet | scssify }}
     {% else %}
         {% capture scss_sheet %}{% include style.scss %}{% endcapture %}
+        {{ scss_sheet | scssify }}
     {% endif %}
-
-    {{ scss_sheet | scssify }}
     </style>
 
 </head>
