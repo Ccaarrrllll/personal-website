@@ -31,6 +31,18 @@ Personal Jekyll site (Ccaarrrllll), deployed via GitHub Pages at https://ccaarrr
 - Styles are in `_sass/components/copy-code.sass` (registered in both `style.scss` and `style-dark.scss`). Hidden until hover where hover exists; always visible on touch.
 - Inline SVG icons, no visible text, only `aria-label`s ("Copy code" / "Copied"), so no site copy needed.
 
+## Image and iframe loading
+- Below-the-fold images and all YouTube iframes use `loading="lazy"`; images also get `decoding="async"`. Files are untouched (no resizing or recompression, so no quality change); it only changes when the browser downloads them.
+- Images in posts carry real `width`/`height` attributes so lazy images reserve space and the page doesn't jump. `img { height: auto }` in `general.sass` keeps them proportional when scaled down; class rules (e.g. the 125px header selfie) still override it.
+- Top-of-page images stay eager (header selfie, about portrait, post `title-image`, and the first image of each gallery post). New images added to a post should follow the same pattern: lazy unless near the top, with dimensions.
+- Still large and uncompressed: some Tiffin PNGs (`Youtube_Banner_v2.png` ~4.3 MB, `Wallpaperv3.png` ~2 MB, `Signed.png` ~1.7 MB). Converting to WebP/optimized PNG would help load time but needs the owner's OK on quality.
+
+## Image lightbox
+- Clicking any `figure img` opens it full-size in a native `<dialog>` (`assets/js/lightbox.js`, styles in `_sass/components/lightbox.sass`, both registered in the entry files / `default.html`). Click anywhere or press Esc to close. Images are keyboard-focusable (`role="button"`, Enter/Space). Skipped if the image is inside a link.
+- Targeting is by `figure img` on purpose, so the header selfie, about portrait and author photo are not zoomable. New post images should be wrapped in `<figure>` to get this behavior.
+- Animation: the image zooms from its thumbnail into the centered view and back (FLIP-style, via the Web Animations API in `lightbox.js`), with a backdrop fade in CSS. Esc is routed through the animated close (`cancel` event). `--scrollbar-width` is set before opening so the page doesn't shift when `html` gets `overflow: hidden`. All motion is skipped under `prefers-reduced-motion`. If the thumbnail is scrolled off-screen on close, it fades instead of zooming back.
+- The dialog reuses the image's existing `src`, so lazy-loaded images load on click and the browser cache serves ones already seen.
+
 ## Security and CI
 - `Gemfile.lock` is tracked (it used to be gitignored, so CI resolved fresh gems on every build). Platforms: `x64-mingw-ucrt` and `x86_64-linux`; keep both when regenerating (`bundle lock --add-platform x86_64-linux`).
 - Update gems with `bundle update --patch` for stability; check advisories with `bundle-audit check --update` (`gem install bundler-audit`). Last audit (2026-11-17): clean after nokogiri 1.19.4 -> 1.19.7.
@@ -42,7 +54,6 @@ Personal Jekyll site (Ccaarrrllll), deployed via GitHub Pages at https://ccaarrr
 - External requests: only Google Tag Manager and the Font Awesome kit script. The kit loader can't use SRI.
 
 ## Backlog (ideas not yet done)
-- Image `loading="lazy"` (no quality loss; only changes when the browser downloads). Avoid resizing/recompressing unless quality is confirmed acceptable.
 - Sitemap (`jekyll-sitemap`), per-post social preview images (`image:` front matter, `jekyll-seo-tag` is installed), TOC on long posts, three-way theme control (auto/light/dark), `theme-color` meta, accessibility pass (alt text, focus styles, `$alpha` contrast on dark), syntax colors in dark mode (`syntax.sass` has hardcoded colors).
 
 ## Conventions
